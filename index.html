@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio v1 | 박진우</title>
+<style>
+  :root { --bg:#0f1115; --card:#181b22; --text:#e8eaed; --muted:#9aa0a6; --accent:#4f8cff; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system, "Pretendard", "Noto Sans KR", sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+  header { position:sticky; top:0; background:rgba(15,17,21,.92); backdrop-filter:blur(6px); border-bottom:1px solid #262a33; z-index:10; }
+  nav { max-width:880px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:14px 20px; }
+  nav .logo { font-weight:700; }
+  nav ul { list-style:none; display:flex; gap:18px; }
+  nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+  nav a:hover { color:var(--text); }
+  main { max-width:880px; margin:0 auto; padding:0 20px 80px; }
+  section { padding:64px 0 16px; }
+  h2 { font-size:14px; letter-spacing:.08em; color:var(--accent); margin-bottom:20px; }
+  .about h1 { font-size:40px; }
+  .about .role { font-size:20px; color:var(--muted); margin:4px 0 12px; }
+  .about a { color:var(--accent); text-decoration:none; }
+  .filters { display:flex; gap:8px; margin-bottom:16px; }
+  .filters button { background:var(--card); color:var(--muted); border:1px solid #2a2f3a; border-radius:999px; padding:6px 14px; cursor:pointer; font-size:13px; }
+  .filters button.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .card { background:var(--card); border:1px solid #262a33; border-radius:12px; padding:18px 20px; margin-bottom:12px; }
+  .card .meta { font-size:13px; color:var(--muted); }
+  .card h3 { font-size:18px; margin:4px 0; }
+  .skill { margin-bottom:16px; }
+  .skill .label { display:flex; justify-content:space-between; font-size:14px; margin-bottom:6px; }
+  .bar { height:8px; background:#262a33; border-radius:999px; overflow:hidden; }
+  .bar span { display:block; height:100%; background:var(--accent); }
+  form { display:grid; gap:10px; }
+  input, textarea { width:100%; background:var(--card); border:1px solid #2a2f3a; border-radius:8px; color:var(--text); padding:10px 12px; font:inherit; }
+  textarea { min-height:120px; resize:vertical; }
+  form button { justify-self:start; background:var(--accent); color:#fff; border:0; border-radius:8px; padding:10px 18px; font-weight:600; cursor:pointer; }
+  footer { text-align:center; color:var(--muted); font-size:12px; padding:24px; }
+  @media (max-width:560px){ nav ul { gap:10px; } .about h1 { font-size:32px; } }
+</style>
+</head>
+<body>
+<header>
+  <nav>
+    <span class="logo">Portfolio v1</span>
+    <ul>
+      <li><a href="#about">내소개</a></li>
+      <li><a href="#activities">활동내역</a></li>
+      <li><a href="#skills">스택</a></li>
+      <li><a href="#contact">Contact me</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="about" class="about">
+    <h2>About_Me</h2>
+    <h1>박진우</h1>
+    <p class="role">AI 백엔드 개발자</p>
+    <p>LLM을 활용한 백엔드 웹 애플리케이션을 생성합니다.</p>
+    <p>📧 <a href="mailto:jinwoo2202@hanyang.ac.kr">jinwoo2202@hanyang.ac.kr</a></p>
+  </section>
+
+  <section id="activities">
+    <h2>Activities</h2>
+    <div class="filters">
+      <button class="active" data-filter="all">ALL</button>
+      <button data-filter="in">교내</button>
+      <button data-filter="out">교외</button>
+    </div>
+    <div class="card" data-type="in">
+      <p class="meta">[교내] 2025.03 - 2025.06</p>
+      <h3>캡스톤 팀 프로젝트</h3>
+      <p>Spring Boot 기반 웹 플랫폼 인증/인가 담당</p>
+    </div>
+    <div class="card" data-type="out">
+      <p class="meta">[교외] 2026.01 - 2026.02</p>
+      <h3>카카오 공모전</h3>
+      <p>MCP Server 개발</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Tech_Stack</h2>
+    <div class="skill"><div class="label"><span>[Language] Java</span><span>70%</span></div><div class="bar"><span style="width:70%"></span></div></div>
+    <div class="skill"><div class="label"><span>[Web] HTML</span><span>70%</span></div><div class="bar"><span style="width:70%"></span></div></div>
+    <div class="skill"><div class="label"><span>[Cloud] Docker</span><span>60%</span></div><div class="bar"><span style="width:60%"></span></div></div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact_Me</h2>
+    <form id="contactForm">
+      <input id="name" placeholder="이름" required>
+      <input id="email" type="email" placeholder="이메일" required>
+      <textarea id="message" placeholder="메시지" required></textarea>
+      <button type="submit">SEND MESSAGE</button>
+    </form>
+  </section>
+</main>
+
+<footer>© 2026 박진우 · Hosted on AWS S3 + CloudFront</footer>
+
+<script>
+  // 활동내역 필터
+  document.querySelectorAll('.filters button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('#activities .card').forEach(c => {
+        c.style.display = (f === 'all' || c.dataset.type === f) ? '' : 'none';
+      });
+    });
+  });
+
+  // Contact: 현재는 메일 앱으로 연결 (이후 API Gateway + Lambda로 교체 예정)
+  document.getElementById('contactForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const n = document.getElementById('name').value;
+    const m = document.getElementById('email').value;
+    const msg = document.getElementById('message').value;
+    const body = encodeURIComponent(`From: ${n} (${m})\n\n${msg}`);
+    location.href = `mailto:jinwoo2202@hanyang.ac.kr?subject=${encodeURIComponent('[Portfolio] ' + n)}&body=${body}`;
+  });
+</script>
+</body>
+</html>
